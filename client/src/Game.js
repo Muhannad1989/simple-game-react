@@ -95,6 +95,7 @@ function Game() {
 
   return (
     <div className="App">
+      <button onClick={reset} class="ui green button restart">Restart game</button>
       <div className="players">
         <a class="ui teal image label">
           <img src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" />

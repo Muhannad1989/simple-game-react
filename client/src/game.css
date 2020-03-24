@@ -30,10 +30,15 @@
   cursor: pointer;
 }
 
-.players{
+.players {
   margin: 0px auto;
   text-align: center;
   margin-top: 70px;
+}
+
+.restart{
+  margin: 5px auto !important;
+  display: block !important;
 }
 
 .border {
