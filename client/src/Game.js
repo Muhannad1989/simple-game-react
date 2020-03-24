@@ -2,15 +2,82 @@ import React, { useState } from 'react';
 import Xo from './components/game/XO';
 import './game.css';
 
+let player1 = 0;
+let player2 = 0;
+
 function Game() {
+
   const _ways = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
   const [ways, setWays] = useState(_ways);
-
   const [player, setPlayer] = useState(0);
+
+
+  const reset = () => {
+    for (let i = 1; i <= 9; i++) {
+      document.getElementById(`div${i}`).innerHTML = '';
+    }
+    setWays(_ways);
+  }
+
+  const conditions = (a, b, c) => {
+    if ((ways[a] === 1 && ways[b] === 1 && ways[c] === 1) ||
+      (ways[a] === 0 && ways[b] === 0 && ways[c] === 0)) {
+      return true
+    }
+  }
+
+  const showMessage = () => {
+    if (player === 1) {
+      alert('the winner is O');
+      player2 = player2 + 1;
+    } else {
+      alert('the winner is X');
+      player1 = player1 + 1;
+    }
+    reset();
+    alert('play new game');
+  }
+
+
+  const check = () => {
+    if (
+      conditions(0, 1, 2)
+    ) {
+      showMessage()
+    } else if (
+      conditions(3, 4, 5)
+    ) {
+      showMessage()
+    } else if (
+      conditions(6, 7, 8)
+    ) {
+      showMessage()
+    } else if (
+      conditions(0, 3, 6)
+    ) {
+      showMessage()
+    } else if (
+      conditions(1, 4, 7)
+    ) {
+      showMessage()
+    } else if (
+      conditions(2, 5, 8)
+    ) {
+      showMessage()
+    } else if (
+      conditions(0, 4, 8)
+    ) {
+      showMessage()
+    } else if (
+      conditions(2, 4, 6)
+    ) {
+      showMessage()
+    }
+  };
 
   const myFunction = index => {
     if (player === 0) {
-      ways[index - 1] = 1; // set ways
+      ways[index - 1] = 1;
       document.getElementById(`div${index}`).innerHTML = 'X';
       setPlayer(1);
     }
@@ -24,99 +91,31 @@ function Game() {
     check();
   };
 
-  // const condition=(a,b,c)=>{
-  //   if (
-  //     (ways[a] === 1 && ways[b] === 1 && ways[c] === 1) ||
-  //     (ways[a] === 0 && ways[b] === 0 && ways[c] === 0)
-  //   ) {
-  //     if (player === 1) {
-  //       alert("the winner is O");
-  //     } else {
-  //       alert("the winner is X");
-  //     }
-  //   }
-  // }
 
-  const check = () => {
-    // condition(0,1,2)
-    if (
-      (ways[0] === 1 && ways[1] === 1 && ways[2] === 1) ||
-      (ways[0] === 0 && ways[1] === 0 && ways[2] === 0)
-    ) {
-      if (player === 1) {
-        alert('the winner is O');
-      } else {
-        alert('the winner is X');
-      }
-    } else if (
-      (ways[3] === 1 && ways[4] === 1 && ways[5] === 1) ||
-      (ways[3] === 0 && ways[4] === 0 && ways[5] === 0)
-    ) {
-      if (player === 1) {
-        alert('the winner is O');
-      } else {
-        alert('the winner is X');
-      }
-    } else if (
-      (ways[6] === 1 && ways[7] === 1 && ways[8] === 1) ||
-      (ways[6] === 0 && ways[7] === 0 && ways[8] === 0)
-    ) {
-      if (player === 1) {
-        alert('the winner is O');
-      } else {
-        alert('the winner is X');
-      }
-
-      //
-      if (player === 1) {
-        alert('the winner is O');
-      } else {
-        alert('the winner is X');
-      }
-    } else if (
-      (ways[2] === 1 && ways[5] === 1 && ways[8] === 1) ||
-      (ways[2] === 0 && ways[5] === 0 && ways[8] === 0)
-    ) {
-      if (player === 1) {
-        alert('the winner is O');
-      } else {
-        alert('the winner is X');
-      }
-    } else if (
-      (ways[0] === 1 && ways[4] === 1 && ways[8] === 1) ||
-      (ways[0] === 0 && ways[4] === 0 && ways[8] === 0)
-    ) {
-      if (player === 1) {
-        alert('the winner is O');
-      } else {
-        alert('the winner is X');
-      }
-    } else if (
-      (ways[2] === 1 && ways[4] === 1 && ways[6] === 1) ||
-      (ways[2] === 0 && ways[4] === 0 && ways[6] === 0)
-    ) {
-      if (player === 1) {
-        alert('the winner is O');
-      } else {
-        alert('the winner is X');
-      }
-      //
-    }
-  };
 
   return (
     <div className="App">
+      <div className="players">
+        <a class="ui teal image label">
+          <img src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" />
+          player 1
+          <div class="detail">{player1}</div>
+        </a>
+        <a class="ui yellow image label">
+          <img src="https://react.semantic-ui.com/images/avatar/small/jenny.jpg " />
+          player 2
+          <div class="detail">{player2}</div>
+        </a>
+      </div>
+
       <div>
-        <div className="game">
-          {/* <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSBZAieOkulioNBvVilYHTpY5wiLdDKDFeXHj8aKSJYgKOj9_mS"
-            alt="lets-play"
-          /> */}
-        </div>
         <div className="container">
           <div className="h1">
             <h1>Tic Tac Toe</h1>
           </div>
+
+
+
           <div className="row border">
             {ways.map((_, index) => (
               <Xo
@@ -126,11 +125,10 @@ function Game() {
                 myFunction={myFunction}
               />
             ))}
-            {/* //_=ietem */}
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

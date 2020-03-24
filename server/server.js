@@ -16,7 +16,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/data', function(request, respond) {
+app.get('/data', function (request, respond) {
   respond.send('hallo');
 });
 //
